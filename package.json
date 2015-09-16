@@ -1,0 +1,23 @@
+{
+  "name": "idea-cli",
+  "version": "1.0.0",
+  "description": "Lightweight command-line based task management tool",
+  "main": "idea",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "node-emoji": "^1.0.3",
+    "sqlite3": "^3.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "idea",
+    "terminal",
+    "cli",
+    "emoji"
+  ],
+  "author": "Henry Tr.",
+  "license": "ISC"
+}

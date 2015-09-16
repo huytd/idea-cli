@@ -1,0 +1,5 @@
+#!/usr/local/bin/node
+
+var Idea = require('./idea.js')
+var app = new Idea();
+app.start(process.argv);
