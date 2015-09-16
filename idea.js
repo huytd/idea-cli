@@ -2,7 +2,7 @@
 'use strict';
 
 var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database('idea.db');
+var db = new sqlite3.Database(__dirname + '/idea.db');
 var colors = require('colors');
 var emoji = require('node-emoji').emoji;
 
@@ -17,7 +17,6 @@ Idea.prototype.list = function() {
     this.clear();
     db.all('SELECT * FROM ideas', function(err, row) {
         if (err != null) {
-            console.log(err);
         } else {
             console.log('Ideas List:'.green.inverse.bold);
             row.map(function(i){
@@ -39,18 +38,15 @@ Idea.prototype.initDB = function() {
     // Database initialization
     db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='ideas'",
     function(err, rows) {
-        if(err !== null) {
-            console.log(err);
-        }
+        if(err !== null) { }
         else if(rows === undefined) {
             db.run('CREATE TABLE "ideas" ' +
             '("id" INTEGER PRIMARY KEY AUTOINCREMENT, ' +
             '"title" VARCHAR(255), ' +
             '"important" INTEGER, ' +
+            '"parent" INTEGER, ' +
             '"checked" INTEGER)', function(err) {
-                if(err !== null) {
-                    console.log(err);
-                }
+                if(err !== null) { }
             });
         }
     });
@@ -58,7 +54,7 @@ Idea.prototype.initDB = function() {
 
 Idea.prototype.createItem = function(params) {
     var idea = params.slice(3).join(' ');
-    db.run('INSERT INTO ideas (title, important, checked) VALUES("' + idea + '", 0, 0)', function(err) { });
+    db.run('INSERT INTO ideas (title, important, parent, checked) VALUES("' + idea + '", 0, 0, 0)', function(err) { });
     this.list();
 }
 
