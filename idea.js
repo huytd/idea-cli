@@ -7,10 +7,9 @@ var colors = require('colors');
 var emoji = require('node-emoji').emoji;
 var config = require('nconf');
 var fs = require('fs');
-var path  = require('path');
 
 function Idea() {
-    config.file({ file: 'config.json' });
+    config.file({ file: __dirname + '/config.json' });
     this.lastSelectedParent = config.get('lastSelectedParent') || 0;
     this.selectedParent = config.get('selectedParent') || 0;
     this.selectedParentTitle = config.get('selectedParentTitle') || "";
@@ -200,7 +199,7 @@ Idea.prototype.displayHelp = function() {
 
 Idea.prototype.saveConfig = function() {
     config.save(function (err) {
-        fs.readFile(path.join(__dirname, 'config.json'), function (err, data) {
+        fs.readFile(__dirname + '/config.json', function (err, data) {
             //console.dir(JSON.parse(data.toString()))
         });
     });
