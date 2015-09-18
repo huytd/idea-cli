@@ -87,7 +87,8 @@ Idea.prototype.markDone = function(params) {
     var self = this;
     db.all(query, function(err, row) {
         var itemToUpdate = row[0];
-        db.run('UPDATE ideas SET checked = "1" WHERE id = "' + itemToUpdate.id + '" OR parent = "' + itemToUpdate.id + '"', function(err) { });
+        var value = (itemToUpdate.checked == 1)?"0":"1";
+        db.run('UPDATE ideas SET checked = "' + value + '" WHERE id = "' + itemToUpdate.id + '" OR parent = "' + itemToUpdate.id + '"', function(err) { });
         self.list();
     });
 }
